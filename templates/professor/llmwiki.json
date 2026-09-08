@@ -1,7 +1,10 @@
 {
   "schema": 1,
   "profile": "professor",
-  "owner": { "student_id": "", "github": "SHSUN76" },
+  "owner": {
+    "student_id": "",
+    "github": "SHSUN76"
+  },
   "professor_github": "SHSUN76",
   "paths": {
     "daily": "0.Daily_Notes",
@@ -15,14 +18,29 @@
   },
   "fleeting_types": {
     "Standard": "",
-    "Daily": "1.Fleeting_Notes/Daily",
-    "Weekly": "1.Fleeting_Notes/Weekly",
-    "Monthly": "1.Fleeting_Notes/Monthly",
-    "Limitless": "1.Fleeting_Notes/Limitless"
+    "Daily": "0.Daily_Notes/Daily",
+    "Weekly": "0.Daily_Notes/Weekly",
+    "Monthly": "0.Daily_Notes/Monthly",
+    "Limitless": "5.Areas/Limitless"
   },
-  "routing": { "project": "4.Project", "area": "5.Areas", "resource": "6.Resources", "archive": "7.Archive" },
-  "gate": { "min_links": 2, "max_overlap": 0.20, "ngram": 8, "pass_avg": 3.5, "cold_start_notes": 5 },
-  "growth": { "growing_inbound": 3, "evergreen_inbound": 5 },
+  "routing": {
+    "project": "4.Project",
+    "area": "5.Areas",
+    "resource": "6.Resources",
+    "archive": "7.Archives"
+  },
+  "gate": {
+    "min_links": 2,
+    "max_overlap": 0.2,
+    "ngram": 8,
+    "pass_avg": 3.5,
+    "cold_start_notes": 5
+  },
+  "growth": {
+    "growing_inbound": 3,
+    "evergreen_inbound": 5
+  },
   "authoring": "auto",
-  "language": "ko"
+  "language": "ko",
+  "_comment": "교수 vault 실제 배치(2026-09-09 실사): 일일/주간/월간은 0.Daily_Notes 아래 연도별 하위 폴더까지 재귀 스캔, Limitless는 5.Areas/Limitless. Standard 빈 값은 paths.fleeting."
 }

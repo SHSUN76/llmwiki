@@ -3,7 +3,7 @@
 GitHub 단계 실패는 요약에 남기고 종료 코드를 올리지 않는다."""
 from __future__ import annotations
 import argparse, json, os, secrets, shutil, subprocess, sys, time
-from datetime import date, datetime
+from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -69,9 +69,15 @@ def github_setup(root: Path, repo: str, professor: str) -> dict:
     rc, _ = _run(["gh", "auth", "status"])
     if rc != 0:
         print("GitHub 로그인이 필요합니다. 브라우저가 열리면 코드를 입력하세요...", flush=True)
-        rc, msg = _run(["gh", "auth", "login", "--web", "--git-protocol", "https", "-h", "github.com"], timeout=600)
+        # 로그인은 대화형으로 돌린다(capture 금지): 8자리 코드와 "Enter 를 누르세요" 안내가 학생 화면에 보여야 한다.
+        try:
+            rc = subprocess.run(["gh", "auth", "login", "--web", "--git-protocol", "https", "-h", "github.com"], timeout=600).returncode
+        except subprocess.TimeoutExpired:
+            rc = 124
+        except FileNotFoundError:
+            rc = 127
         if rc != 0:
-            out["status"] = "skipped: not logged in"; out["detail"] = msg[-200:]; return out
+            out["status"] = "skipped: not logged in"; out["detail"] = f"gh auth login rc={rc}"; return out
     rc, login = _run(["gh", "api", "user", "-q", ".login"])
     if rc != 0:
         out["status"] = "skipped: cannot read user"; return out
@@ -123,7 +129,7 @@ def register_obsidian_vault(root: Path) -> dict:
 
 def run_init(root: Path, student_id: str, github: bool = True, professor: str = "SHSUN76", repo: str | None = None, register_obsidian: bool = True) -> dict:
     root = Path(root).resolve(); root.mkdir(parents=True, exist_ok=True)
-    today = date.today().isoformat()
+    today = datetime.now(timezone(timedelta(hours=9))).date().isoformat()  # KST
     created, skipped = copy_templates(root, student_id, today)
     summary = {"root": str(root), "created": created, "skipped": skipped, "git": git_init(root, student_id)}
     summary["github"] = github_setup(root, repo or f"llmwiki-{student_id}", professor) if github else {"status": "skipped: --no-github"}
