@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "profile": "professor",
+  "owner": { "student_id": "", "github": "SHSUN76" },
+  "professor_github": "SHSUN76",
+  "paths": {
+    "daily": "0.Daily_Notes",
+    "fleeting": "1.Fleeting_Notes",
+    "literature": "2.Literature_Notes",
+    "permanent": "3.Permanent_Notes",
+    "index": "3.Permanent_Notes/slipbox/index.md",
+    "project": "4.Project",
+    "meta": "_meta",
+    "reports": "_reports"
+  },
+  "fleeting_types": {
+    "Standard": "",
+    "Daily": "1.Fleeting_Notes/Daily",
+    "Weekly": "1.Fleeting_Notes/Weekly",
+    "Monthly": "1.Fleeting_Notes/Monthly",
+    "Limitless": "1.Fleeting_Notes/Limitless"
+  },
+  "routing": { "project": "4.Project", "area": "5.Areas", "resource": "6.Resources", "archive": "7.Archive" },
+  "gate": { "min_links": 2, "max_overlap": 0.20, "ngram": 8, "pass_avg": 3.5, "cold_start_notes": 5 },
+  "growth": { "growing_inbound": 3, "evergreen_inbound": 5 },
+  "authoring": "auto",
+  "language": "ko"
+}
