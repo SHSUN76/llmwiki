@@ -32,7 +32,7 @@ python "${CLAUDE_PLUGIN_ROOT}/skills/_shared/scripts/wikiconf.py"
 
 - `$ARGUMENTS`가 파일 경로면 그 파일 하나만 본다.
 - `--only 오늘`이면 오늘 것만 본다. 오늘 날짜는 KST `YYYY-MM-DD`. Daily 타입은 파일명이 `<오늘>.md`인 것, Standard 타입은 파일명이 `<YYYYMMDD>-`로 시작하거나 frontmatter `created`가 오늘인 것. 파일 수정 시각(mtime)은 쓰지 않는다.
-- `--all`이면 `processed: false`인 것을 전부 본다.
+- `--all`이면 `processed`가 `true`가 아닌 것을 전부 본다.
 - 인자가 없으면 `--only 오늘`과 같이 본다.
 
 `status: hold`이고 `review_at`이 아직 오지 않은 노트는 건너뛴다. `review_at`이 지난 노트는 다시 후보로 올린다.
@@ -136,7 +136,7 @@ python "${CLAUDE_PLUGIN_ROOT}/skills/_shared/scripts/linker.py" insert --index "
 
 부모 없이 섹션에 처음 넣을 때는 `--parent` 대신 `--section <섹션코드>`를 쓴다. 출력 `{"inserted": ..., "after_line": ..., "total": ...}`의 `inserted`는 **들여쓰기를 지운 표시용 문자열**이다. 이 값을 파일에 다시 쓰지 않는다. 삽입과 상단 통계 줄 갱신은 이 명령 하나로 끝난다.
 
-3. 원본 노트를 Edit 도구로 **줄 단위로만** 고친다. frontmatter의 `processed: false`를 `processed: true`로 바꾸고, 본문 맨 끝에 `- 승격: [[<제목>]] (<번호>)` 한 줄을 덧붙인다. 파일 전체를 다시 쓰지 않는다.
+3. 원본 노트를 Edit 도구로 **줄 단위로만** 고친다. frontmatter의 `processed: false`를 `processed: true`로 바꾸고(키가 없으면 frontmatter 닫는 `---` 바로 위에 `processed: true` 한 줄을 추가하고), 본문 맨 끝에 `- 승격: [[<제목>]] (<번호>)` 한 줄을 덧붙인다. 파일 전체를 다시 쓰지 않는다.
 
 4. 로그를 남긴다.
 
