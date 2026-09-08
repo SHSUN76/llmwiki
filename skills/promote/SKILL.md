@@ -28,7 +28,7 @@ python "${CLAUDE_PLUGIN_ROOT}/skills/_shared/scripts/wikiconf.py"
 
 ## 1. 스캔·분류
 
-`fleeting_types`의 각 값이 가리키는 폴더를 훑는다. 값이 빈 문자열이면 `paths.fleeting`을 뜻한다. `fleeting_types`의 각 폴더와 그 **하위 폴더 전체**(Glob `<폴더>/**/*.md`)에서 frontmatter `processed: false`인 노트를 모은다. `_`로 시작하는 파일(`_template.md` 등)은 제외한다.
+`fleeting_types`의 각 값이 가리키는 폴더를 훑는다. 값이 빈 문자열이면 `paths.fleeting`을 뜻한다. `fleeting_types`의 각 폴더와 그 **하위 폴더 전체**(Glob `<폴더>/**/*.md`)에서 frontmatter `processed`가 `true`가 아닌 노트(키가 없거나 `false`)를 모은다. 기존 vault의 노트는 `processed` 키가 없는 경우가 많다. `_`로 시작하는 파일(`_template.md` 등)은 제외한다.
 
 - `$ARGUMENTS`가 파일 경로면 그 파일 하나만 본다.
 - `--only 오늘`이면 오늘 것만 본다. 오늘 날짜는 KST `YYYY-MM-DD`. Daily 타입은 파일명이 `<오늘>.md`인 것, Standard 타입은 파일명이 `<YYYYMMDD>-`로 시작하거나 frontmatter `created`가 오늘인 것. 파일 수정 시각(mtime)은 쓰지 않는다.
