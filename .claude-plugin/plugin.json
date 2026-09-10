@@ -1,6 +1,6 @@
 {
   "name": "llmwiki",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "제텔카스텐 규칙으로 임시노트·문헌노트를 영구노트로 승격하는 LLMwiki 플러그인. 승격 게이트와 루만 번호는 스크립트가 판정한다.",
   "author": {
     "name": "Seho Sun",

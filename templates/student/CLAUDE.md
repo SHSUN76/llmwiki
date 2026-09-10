@@ -8,4 +8,4 @@
 4. 매 실습 마지막 15분: `/llmwiki:daily` → `/llmwiki:promote --only 오늘` → `git add -A && git commit -m "wiki: <날짜>" && git push`.
 5. `_meta/promotion-log.jsonl`과 `_reports/`는 채점 자료입니다. 지우거나 고치지 않습니다.
 
-폴더: `0.Daily_Notes` 일일 기록 · `1.Fleeting_Notes` 임시노트 · `2.Literature_Notes` 문헌노트(강의록은 `Lectures/`) · `3.Permanent_Notes` 영구노트 · `4.Project` 도구 출력.
+폴더: `0.Daily_Notes` 일일 기록 · `1.Fleeting_Notes` 임시노트 · `2.Literature_Notes` 문헌노트(강의록은 `Lectures/`) · `3.Permanent_Notes` 영구노트 (여기까지 제텔카스텐 처리 단계) · `4.Project` 마감 있는 과제와 도구 출력 · `5.Areas` 끝나지 않는 책임 · `6.Resources` 관심 자료 · `7.Archives` 끝난 것 보관 (4~7은 PARA 상자, 직접 정리).

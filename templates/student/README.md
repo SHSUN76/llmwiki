@@ -10,11 +10,16 @@
 | `1.Fleeting_Notes/` | 수업 중에 스친 한 줄 생각. 하루 안에 처리합니다 | `/llmwiki:capture` |
 | `2.Literature_Notes/` | 강의록·교재·논문을 읽고 만든 문헌노트. 교수가 배포한 강의록은 `Lectures/`에 들어갑니다 | `/llmwiki:literature`, 주2 정리기 |
 | `3.Permanent_Notes/` | 자기 말로 쓴 영구노트. 루만 번호와 `slipbox/index.md`는 스크립트가 관리합니다 | `/llmwiki:promote` |
-| `4.Project/` | 수업에서 만든 도구가 읽고 쓰는 자리 | 도구 |
+| `4.Project/` | PARA의 Projects. 마감과 완료가 있는 과제·발표. 수업 도구의 출력(`flashcards/`)도 여기 | 나 · 도구 |
+| `5.Areas/` | PARA의 Areas. 끝나지 않는 책임(학점 관리 · 건강 · 영어) | 나 |
+| `6.Resources/` | PARA의 Resources. 관심 있어 모아 두는 자료(배터리 자료 · 파이썬 메모) | 나 |
+| `7.Archives/` | PARA의 Archives. 끝난 프로젝트와 비활성 자료. 삭제가 아니라 보관 | 나 |
 | `_meta/` | `promotion-log.jsonl` — 승격 판정 기록 | 스크립트 |
 | `_reports/` | 마일스톤 보고서 `.md`·`.json` | `/llmwiki:status` |
 
 각 폴더의 `_template.md`는 새 노트의 서식입니다. 직접 고칠 일은 없습니다.
+
+0~3번 폴더는 제텔카스텐의 처리 단계(임시 → 문헌 → 영구)이고, 4~7번 폴더는 PARA의 네 상자입니다. 승격 게이트와 채점은 0~3번과 `_meta/`만 봅니다. 4~7번은 여러분이 직접 정리하는 자리이고, 노트의 자리는 만든 시점이 아니라 지금 무엇에 커밋했는지로 정합니다.
 
 ## 매주 15분 의식
 

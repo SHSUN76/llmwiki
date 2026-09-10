@@ -58,7 +58,10 @@ LLMwiki/
 │   └── Lectures/              # 교수 배포 강의록이 들어가는 자리
 ├── 3.Permanent_Notes/
 │   └── slipbox/index.md       # 루만 번호 트리 (스크립트가 관리)
-├── 4.Project/                 # 수업에서 만든 도구의 출력
+├── 4.Project/                 # PARA Projects: 마감 있는 과제·발표 + 수업 도구의 출력
+├── 5.Areas/                   # PARA Areas: 끝나지 않는 책임
+├── 6.Resources/               # PARA Resources: 관심 자료
+├── 7.Archives/                # PARA Archives: 끝난 것 보관 (0~3은 처리 단계, 4~7은 PARA 상자)
 ├── _meta/promotion-log.jsonl  # 승격 판정 기록
 └── _reports/                  # 마일스톤 보고서 md·json
 ```
