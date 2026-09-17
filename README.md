@@ -34,6 +34,14 @@ Claude Code를 다시 시작하면 `/llmwiki:` 로 여섯 개 스킬이 잡힌�
 | `literature` | 문헌노트의 "하이라이트 + 나의 메모" 세트마다 승격 시도. 원본은 보존 | `/llmwiki:literature <문헌노트 경로> [--dry-run]` |
 | `status` | 마일스톤 보고서 생성, 고아 노트·성장 태그 승급 후보 제시 | `/llmwiki:status [--milestone w05\|w10\|w15]` |
 
+`literature`는 모드가 둘이다. 문헌노트 경로를 주면 승격이고, `--from`을 주면 6.Resources에 넣은 교재와 내 노트로 문헌노트를 새로 만든다.
+
+```
+/llmwiki:literature --from 6.Resources/화공열역학_3장.pdf --notes 1.Fleeting_Notes/20260918-1430-엔트로피.md --source "화공열역학 3주차"
+```
+
+생성 모드에서 하이라이트는 교재 원문을 글자 그대로 인용하고 위치(`(슬라이드 12)`·`(p. 5)`)를 붙이며, `**나의 메모**:`는 LLM이 쓰지 않는다 — 내 노트에 같은 주제 문장이 있으면 그대로 옮기고 없으면 빈칸으로 둔다. `.pdf`는 Read 도구로 읽고 `.pptx`는 `skills/_shared/scripts/doc_text.py`가 슬라이드별 텍스트를 뽑는다(표준 라이브러리만 쓴다).
+
 스킬 본문에는 폴더 이름이 없다. 모든 경로는 위키 루트의 `llmwiki.json`에서 읽으므로 폴더 구조를 바꾸려면 설정만 고치면 된다.
 
 ### 매주 15분 의식
