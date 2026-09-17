@@ -61,11 +61,26 @@ def git_init(root: Path, student_id: str) -> dict:
         out["first_commit"] = True
     return out
 
+def _normalize_origin(root: Path, full: str) -> str:
+    """origin 을 https 주소로 고정하고 그 주소를 돌려준다. 이미 https 면 그대로 둔다.
+    저장된 값을 봐야 하므로 `git remote get-url` 대신 `git config --get` 을 쓴다(get-url 은 url.insteadOf 치환을 적용한 주소를 돌려줘 ssh 원격이 보이지 않는다)."""
+    https = f"https://github.com/{full}.git"
+    rc, url = _run(["git", "config", "--get", "remote.origin.url"], root)
+    url = url.strip()
+    if rc != 0 or not url:
+        _run(["git", "remote", "add", "origin", https], root)
+        return https
+    if url.startswith(("git@github.com:", "ssh://git@github.com/", "ssh://github.com/")):
+        rc, _ = _run(["git", "remote", "set-url", "origin", https], root)
+        return https if rc == 0 else url
+    return url
+
 def github_setup(root: Path, repo: str, professor: str) -> dict:
-    out = {"status": "", "repo": "", "pushed": False, "collaborator": ""}
+    out = {"status": "", "repo": "", "pushed": False, "collaborator": "", "remote_url": ""}
     rc, _ = _run(["gh", "--version"])
     if rc != 0:
         out["status"] = "skipped: gh not found"; return out
+    _run(["gh", "config", "set", "git_protocol", "https"])  # 교내망은 22번 포트(SSH)가 막혀 있다: gh 가 만드는 원격을 https 로 고정
     rc, _ = _run(["gh", "auth", "status"])
     if rc != 0:
         print("GitHub 로그인이 필요합니다. 브라우저가 열리면 코드를 입력하세요...", flush=True)
@@ -78,6 +93,7 @@ def github_setup(root: Path, repo: str, professor: str) -> dict:
             rc = 127
         if rc != 0:
             out["status"] = "skipped: not logged in"; out["detail"] = f"gh auth login rc={rc}"; return out
+    _run(["gh", "auth", "setup-git"])  # git credential helper 를 gh 로 붙인다(https push 인증). 실패해도 진행한다
     rc, login = _run(["gh", "api", "user", "-q", ".login"])
     if rc != 0:
         out["status"] = "skipped: cannot read user"; return out
@@ -87,11 +103,9 @@ def github_setup(root: Path, repo: str, professor: str) -> dict:
         rc, msg = _run(["gh", "repo", "create", repo, "--private", "--source", str(root), "--remote", "origin", "--push"], root, timeout=300)
         if rc != 0:
             out["status"] = "failed: repo create"; out["detail"] = msg[-300:]; return out
-        out["pushed"] = True
+        out["pushed"] = True; out["remote_url"] = _normalize_origin(root, full)
     else:
-        rc, _ = _run(["git", "remote", "get-url", "origin"], root)
-        if rc != 0:
-            _run(["git", "remote", "add", "origin", f"https://github.com/{full}.git"], root)
+        out["remote_url"] = _normalize_origin(root, full)
         rc, _ = _run(["git", "push", "-u", "origin", "main"], root, timeout=300)
         out["pushed"] = rc == 0
     out["repo"] = full

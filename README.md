@@ -21,6 +21,8 @@ Claude Code를 다시 시작하면 `/llmwiki:` 로 여섯 개 스킬이 잡힌�
 /llmwiki:init --root ~/LLMwiki --student-id 20261234
 ```
 
+`init`은 GitHub 원격을 `https://` 주소로 고정한다. 교내망에서 22번 포트(SSH)가 막혀 있어도 push가 되게 하려는 장치다.
+
 ## 스킬
 
 | 스킬 | 하는 일 | 사용법 |
